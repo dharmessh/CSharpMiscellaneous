@@ -85,8 +85,8 @@ namespace Practice
             // Another Way - Without using temporary variable
 
             //  a = a + b;
-            //  a = a - b;
             //  b = a - b;
+            //  a = a - b;
         }
     }
 }
