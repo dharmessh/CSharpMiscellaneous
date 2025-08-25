@@ -1,0 +1,26 @@
+using System;
+
+class Program
+{
+    static void Main()
+    {
+        string str = "Hello, world!";
+        int count = 0;
+
+        try
+        {
+            while (true)
+            {
+                // Try to access index until exception occurs
+                char ch = str[count];
+                count++;
+            }
+        }
+        catch (IndexOutOfRangeException)
+        {
+            // End of string reached
+        }
+
+        Console.WriteLine("Length of string: " + count);
+    }
+}
