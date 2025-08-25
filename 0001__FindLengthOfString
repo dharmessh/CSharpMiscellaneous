@@ -1,26 +1,92 @@
 using System;
 
-class Program
+namespace Practice
 {
-    static void Main()
+    internal class Program
     {
-        string str = "Hello, world!";
-        int count = 0;
-
-        try
+        static void Main(string[] args)
         {
-            while (true)
+            Console.WriteLine("Hello, World!");
+
+            string outputData = StringManipulator.ReverseStringTwo("DHARMESH");
+            Console.WriteLine(outputData);
+
+            bool isValidPalindrome = StringManipulator.IsPalindrome("EYE");
+            Console.WriteLine(isValidPalindrome);
+
+            int length = StringManipulator.FindLength("INDIA");
+            Console.WriteLine(length);
+            
+            int x = 10, y = 20;
+            Console.WriteLine($"Before Swap : {x} and {y}");
+            StringManipulator.Swap(ref x, ref y);
+            Console.WriteLine($"After Swap : {x} and {y}");
+
+            int a = 50, b = 60;
+            Console.WriteLine($"Before Swap : {a} and {b}");
+            StringManipulator.Swap(ref a, ref b);
+            Console.WriteLine($"After Swap : {a} and {b}");
+        }
+    }
+
+    public static class StringManipulator
+    {
+        // Reversing string using two loops is not possible in C# like C and C++, because of immutability in C# Strings.
+        public static string ReverseStringTwo(string inputData)
+        {
+            string reversedData = "";
+            for (int j = inputData.Length - 1; j >= 0; j--)
             {
-                // Try to access index until exception occurs
-                char ch = str[count];
-                count++;
+                reversedData += inputData[j];
             }
-        }
-        catch (IndexOutOfRangeException)
-        {
-            // End of string reached
+            return reversedData;
         }
 
-        Console.WriteLine("Length of string: " + count);
+        public static bool IsPalindrome(string inputData)
+        {
+            for (int i = 0, j = inputData.Length - 1; i < j; i++,j-- )
+            {
+                if (inputData[i] != inputData[j])
+                    return false;
+            }
+            return true;
+        }
+
+        public static int FindLength(string inputData)
+        {
+            int length = 0;
+
+            try
+            {
+                while (true)
+                {
+                    char ch = inputData[length];
+                    length++;
+                }
+
+            }
+            catch (Exception)
+            {
+
+            }
+            finally
+            {
+                // Return statements are not allowed within finally block!!
+            }
+            return length;
+        }
+
+        public static void Swap(ref int a, ref int b)
+        {
+            int temp = a;
+            a = b;
+            b = temp;
+
+            // Another Way - Without using temporary variable
+
+            //  a = a + b;
+            //  a = a - b;
+            //  b = a - b;
+        }
     }
 }
