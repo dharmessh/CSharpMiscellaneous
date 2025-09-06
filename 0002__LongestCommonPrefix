@@ -1,0 +1,38 @@
+using System;
+
+namespace Practice
+{
+    internal class Program
+    {
+        static void Main()
+        {
+            // string[] testStringA = new string[5] { "India", "Indonesia", "Indium", "International", "Intranet"};
+            string[] testStringA = new string[2] { "ab", "a" };
+            string prefix = LongestCommonPrefix(testStringA);
+
+            Console.WriteLine(prefix);
+        }
+
+
+        // https://leetcode.com/problems/longest-common-prefix/
+        // Problem 14. Longest Common Prefix
+        // Leetcode
+        public static string LongestCommonPrefix(string[] strs)
+        {
+            Array.Sort(strs);
+            var longestPrefix = new List<char>(); 
+            string firstElement = strs[0];
+            string lastElement = strs[^1];
+
+            for (int i = 0; i < firstElement.Length; i++)
+            {
+                if (firstElement[i] != lastElement[i])
+                {
+                    break;
+                }
+                longestPrefix.Add(firstElement[i]);
+            }
+            return longestPrefix.Count > 0 ? new string(longestPrefix.ToArray()) : "";
+        }
+    }
+}
