@@ -1,0 +1,54 @@
+using System;
+
+namespace Practice
+{
+    internal class Program
+    {
+        static void Main()
+        {
+            string? input = Console.ReadLine();
+            if (!string.IsNullOrEmpty(input))
+            {
+                int number = int.Parse(input);
+                List<string> result = (List<string>)FizzBuzz(number);
+                foreach (var str in result)
+                {
+                    Console.WriteLine(str);
+                }
+            }
+            else
+            {
+                Console.WriteLine("Input cannot be null or empty.");
+            }
+        }
+
+        // https://leetcode.com/problems/fizz-buzz/
+        // Problem 412. Fizz Buzz
+        // Leetcode
+        public static IList<string> FizzBuzz(int n)
+        {
+            List<string> answer = new List<string>();
+
+            for (int i = 1; i <= n; i++)
+            {
+                if (i % 3 == 0 && i % 5 == 0)
+                {
+                    answer.Add("FizzBuzz");
+                }
+                else if (i % 3 == 0)
+                {
+                    answer.Add("Fizz");
+                }
+                else if (i % 5 == 0)
+                {
+                    answer.Add("Buzz");
+                }
+                else
+                {
+                    answer.Add(i.ToString());
+                }
+            }
+            return answer;
+        }
+    }
+}
