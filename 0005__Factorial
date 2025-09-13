@@ -1,0 +1,41 @@
+using System;
+
+namespace Practice
+{
+    internal class Program
+    {
+        static void Main()
+        {
+            Console.WriteLine("Enter Number:");
+            string? number = Console.ReadLine();
+
+            if (int.TryParse(number, out int num) && num >= 0)
+            {
+                Console.WriteLine("Factorial : " + Factorial(num));
+            }
+            else
+            {
+                Console.WriteLine("Please Enter Valid Number.");
+                return;
+            }
+        }
+
+        // Function to generate Factorial of a number
+        public static int Factorial(int number)
+        {
+            int factorial = 1;
+            if (number == 0 || number == 1)
+            {
+                return factorial;
+            }
+            else
+            {
+               for (int i = number; i >= 1; i--)
+                {
+                    factorial = factorial * i;
+                }
+                return factorial;
+            }
+        }
+    }
+}
