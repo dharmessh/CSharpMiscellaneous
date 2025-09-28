@@ -1,0 +1,38 @@
+using System;
+
+namespace Practice
+{
+    internal class Program
+    {
+        static void Main()
+        {
+            // Sample Array of Integers
+            int[] numbers = { 3, 95, 7, 2, 8, -1, 4, 0, 15, -99, 8 };
+            int[] numArray = { 10, 8, 7 };
+            int[] numArrayTwo = { 7, 8, 9 };
+
+            Console.WriteLine(IsArraySorted(numbers));
+            Console.WriteLine(IsArraySorted(numArray));
+            Console.WriteLine(IsArraySorted(numArrayTwo));
+        }
+
+        // https://www.geeksforgeeks.org/problems/check-if-an-array-is-sorted0701/1
+        // Function to check if an Array is Sorted (Only Ascending)
+        // GFG
+        public static bool IsArraySorted(int[] numbers)
+        {
+            for(int i = 1; i < numbers.Length; i++)
+            {
+                if (numbers[i] >= numbers[i - 1])
+                {
+                    continue;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+    }
+}
