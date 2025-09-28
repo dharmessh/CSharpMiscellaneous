@@ -1,0 +1,64 @@
+using System;
+
+namespace Practice
+{
+    internal class Program
+    {
+        static void Main()
+        {
+            // Sample Array of Integers
+            int[] numbers = { 3, 95, 7, 2, 8, -1, 4, 0, 15, -99, 8 };
+
+            int[] numArray = { 10, 8, 7 };
+
+            // Brute Force Approach
+            int secondLargestV1 = FindSecondlargestV1(numbers);
+            Console.WriteLine(secondLargestV1);
+
+            // Optiaml Approach
+            int secondLargestV2 = FindSecondLargestV2(numArray);
+            Console.WriteLine(secondLargestV2);
+        }
+
+        // https://www.geeksforgeeks.org/problems/second-largest3735/1
+        // Function to Calculate Second Largest Integer in an Array
+        // GFG
+        public static int FindSecondlargestV1(int[] numbers)
+        {
+            Array.Sort(numbers);
+            int secondlargest = -1;
+
+            for (int i = numbers.Length - 2; i >= 0; i--)
+            {
+                if (numbers[i] != numbers[numbers.Length - 1])
+                {
+                    secondlargest = numbers[i];
+                    break;
+                }
+            }
+            return secondlargest;
+        }
+
+        // Optimal Approach
+        public static int FindSecondLargestV2(int[] numbers)
+        {
+            int firstLargest = numbers[0];
+            int secondlargest = -1;
+
+            for (int i = 1; i < numbers.Length; i++)
+            {
+                if (numbers[i] > firstLargest)
+                {
+                    secondlargest = firstLargest;
+                    firstLargest = numbers[i];
+                }
+
+                else if (numbers[i] > secondlargest && numbers[i] < firstLargest)
+                {
+                    secondlargest = numbers[i];
+                }
+            }
+            return secondlargest;
+        }
+    }
+}
