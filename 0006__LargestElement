@@ -1,0 +1,51 @@
+using System;
+
+namespace Practice
+{
+    internal class Program
+    {
+        static void Main()
+        {
+            // Sample Array of Integers
+            int[] numbers = { 3, 95, 7, 2, 8, -1, 4, 0, 15, -99 };
+
+            int largestNum = LargestInteger(numbers);
+            Console.WriteLine(largestNum);
+
+            int smallestNumber = SmallestInteger(numbers);
+            Console.WriteLine(smallestNumber);
+        }
+
+        // https://www.geeksforgeeks.org/problems/largest-element-in-array4009/1
+        // Function to Calculate First Largest Integer in an Array
+        // GFG
+        public static int LargestInteger(int[] numbers)
+        {
+            int largest = numbers[0];
+
+            for (int i = 1; i < numbers.Length; i++)
+            {
+                if (numbers[i] > largest)
+                {
+                    largest = numbers[i];
+                }
+            }
+            return largest;
+        }
+
+        // Function to Calculate First Smallest Integer in an Array
+        public static int SmallestInteger(int[] numbers)
+        {
+            int smallest = numbers[0];
+
+            for (int i = 1; i < numbers.Length; i++)
+            {
+                if (numbers[i] < smallest)
+                {
+                    smallest = numbers[i];
+                }
+            }
+            return smallest;
+        }
+    }
+}
