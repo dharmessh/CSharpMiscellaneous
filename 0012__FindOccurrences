@@ -1,0 +1,61 @@
+using System;
+using System.Security.Cryptography.X509Certificates;
+
+namespace Practice
+{
+    internal class Program
+    {
+        static void Main()
+        {
+            // Sample Array of Integers
+            int[] numbersArr = { 1, 0, 3, 0, 0, 6, 7 };
+
+            Console.WriteLine(FindFirstOccurence(numbersArr, 0));
+            Console.WriteLine(FindLastOccurence(numbersArr, 0));
+            Console.WriteLine(FindAllOccurences(numbersArr, 0));
+        }
+
+        // https://www.geeksforgeeks.org/problems/search-an-element-in-an-array-1587115621/1
+        // Find First Occurence
+        // GFG
+        public static int FindFirstOccurence(int[] inputArr, int k)
+        {
+            for (int i = 0; i < inputArr.Length; i++)
+            {
+                if (inputArr[i] == k)
+                {
+                    return i;
+                }
+            }
+            return -1;
+        }
+
+        // Find Last Occurence
+        public static int FindLastOccurence(int[] inputArr, int k)
+        {
+            for (int i = inputArr.Length - 1; i >= 0; i--)
+            {
+                if (inputArr[i] == k)
+                {
+                    return i;
+                }
+            }
+            return -1;
+        }
+
+        // Find All Occurence
+        public static string FindAllOccurences(int[] inputArr, int k)
+        {
+            List<int> result = new List<int>();
+
+            for (int i = 0; i < inputArr.Length; i++)
+            {
+                if (inputArr[i] == k)
+                {
+                    result.Add(i);
+                }
+            }
+            return string.Join(", ", result);
+        }
+    }
+}
