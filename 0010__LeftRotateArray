@@ -1,1 +1,86 @@
+using System;
+
+namespace Practice
+{
+    internal class Program
+    {
+        static void Main()
+        {
+            // Sample Array of Integers
+            int[] numbers = {1, 1, 2, 2, 2, 3, 4, 5, 6, 6};
+            int[] numbersArr = {1,2,3,4,5};
+
+            LeftRotateArray(numbers, 2);
+
+            LeftRotateArrayV1(numbersArr, 10);
+
+            foreach (int i in numbersArr)
+            {
+                Console.WriteLine(i);
+            }
+        }
+
+        // Rotating Array by One Place
+        public static int[] LeftRotateArrayByOnePlace(int[] inputArr)
+        {
+            int temp = inputArr[0];
+
+            for (int i = 1; i < inputArr.Length; i++)
+            {
+                inputArr[i - 1] = inputArr[i];
+            }
+
+            inputArr[inputArr.Length - 1] = temp;
+            return inputArr;
+        }
+
+        // Brute Force Approach
+        public static int[] LeftRotateArray(int[] inputArr, int k) 
+        {
+            k = k % inputArr.Length; // In case k is greater than array length
+
+            int[] tempArr = new int[k];
+
+            for (int i = 0; i < k; i++)
+            {
+                tempArr[i] = inputArr[i];
+            }
+
+            for (int i = k; i < inputArr.Length; i++)
+            {
+                inputArr[i - k] = inputArr[i];
+            }
+
+            for(int i = inputArr.Length - k; i < inputArr.Length; i++)
+            {
+                inputArr[i] = tempArr[i - (inputArr.Length - k)];
+            }
+
+            return inputArr;
+        }
+
+        // Optimal Approach
+        public static int[] LeftRotateArrayV1(int[] inputArr, int K)
+        {
+            K = K % inputArr.Length; // In case K is greater than array length
+            ReverseIntegerArray(inputArr, 0, K - 1);
+            ReverseIntegerArray(inputArr, K, inputArr.Length - 1);
+            ReverseIntegerArray(inputArr, 0, inputArr.Length - 1);
+            return inputArr;
+        }
+
+        public static int[] ReverseIntegerArray(int[] inputArr, int start, int end)
+        {
+            while (start < end)
+            {
+                int temp = inputArr[end];
+                inputArr[end] = inputArr[start];
+                inputArr[start] = temp;
+                start++;
+                end--;
+            }
+            return inputArr;
+        }
+    }
+}
 
