@@ -1,0 +1,120 @@
+using System;
+using System.Security.Cryptography.X509Certificates;
+
+namespace Practice
+{
+    internal class Program
+    {
+        static void Main()
+        {
+            // Sample Array of Integers
+            int[] numbersA = { 1, 2, 3, 4, 5, 6, 7 };
+            int[] numbersB = { 1, 3, 5, 7, 8, 9, 10 };
+            // Result : 1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+
+            int[] numbersC = { 1, 2, 2, 4, 5, 7, 7 };
+            int[] numbersD = { 1, 3, 5, 7, 8, 9, 10 };
+            // Result : 1, 2, 3, 4, 5, 7, 8, 9, 10
+
+            int[] numbersE = { 1, 1, 2, 4, 5, 7, 7,  10, 11, 12, 13, 14, 20 };
+            int[] numbersF = { 1, 1, 5, 7, 8, 9, 10, 13, 20 };
+            // Result : 1, 2, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 20
+
+            // Finding Union
+            var newList = FindUnionV2(numbersF, numbersE);
+            Console.WriteLine($"Total Count: {newList.Count}");
+            foreach (var i in newList)
+            {
+                Console.WriteLine(i);
+            }
+        }
+        
+        // Brute Force Approach
+        public static List<int> FindUnionV1(int[] inputA, int[] inputB)
+        {
+            SortedSet<int> uniqueElements = new SortedSet<int>();
+
+            for (int i = 0; i < inputA.Length; i++)
+            {
+                uniqueElements.Add(inputA[i]);
+            }
+
+            for (int i = 0; i < inputB.Length; i++)
+            {
+                uniqueElements.Add(inputB[i]);
+            }
+
+            return uniqueElements.ToList();
+        }
+
+        // https://www.geeksforgeeks.org/problems/union-of-two-sorted-arrays-1587115621/1
+        // GFG - Union of two sorted arrays
+        // Optimal Approach
+        public static List<int> FindUnionV2(int[] inputA, int[] inputB)
+        {
+            List<int> result = new List<int>();
+
+            int i = 0; // Pointer for inputA Array
+            int j = 0; // Pointer for inputB Array
+          
+            while (i < inputA.Length && j < inputB.Length)
+            {
+                // Bypasses the same element appearing consecutive in an inputA array
+                while (i < inputA.Length - 1 && inputA[i] == inputA[i + 1])
+                {
+                    i++;
+                }
+
+                // Bypasses the same element appearing consecutive in inputB array
+                while (j < inputB.Length - 1 && inputB[j] == inputB[j + 1])
+                {
+                    j++;
+                }
+
+                if (inputA[i] < inputB[j])
+                {
+                    result.Add(inputA[i]);
+                    i++;
+                }
+                else if (inputB[j] < inputA[i])
+                {
+                    result.Add(inputB[j]);
+                    j++;
+                }
+                else
+                {
+                    result.Add(inputA[i]);
+                    i++;
+                    j++;
+                }
+            }
+
+            // For iterating remaining portion of inputA array
+            while(i < inputA.Length)
+            {
+                // Bypasses the same element appearing consecutive in an inputA array
+                while (i < inputA.Length - 1 && inputA[i] == inputA[i + 1])
+                {
+                    i++;
+                }
+
+                result.Add(inputA[i]);
+                i++;
+            }
+
+            // For iterating remaining portion of inputB array
+            while (j < inputB.Length)
+            {
+                // Bypasses the same element appearing consecutive in an inputB array
+                while (j < inputB.Length - 1 && inputB[j] == inputB[j + 1])
+                {
+                    j++;
+                }
+
+                result.Add(inputB[j]);
+                j++;
+            }
+            return result;
+        }
+    }
+}
