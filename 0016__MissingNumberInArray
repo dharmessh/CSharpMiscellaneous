@@ -1,0 +1,89 @@
+using System;
+
+namespace Practice
+{
+    internal class Program
+    {
+        static void Main()
+        {
+            // Sample Array of Integers
+            int[] numbersA = { 0, 1, 2, 4, 5};
+            int[] numbersB = { 0, 1};
+
+            Console.WriteLine(FindMissingNumberV4(numbersA));
+        }
+
+        // https://leetcode.com/problems/missing-number/
+        // LeetCode - Missing number in given array of range (0, n).
+        // Brute Force Approach
+        public static int FindMissingNumberV1(int[] numbers) 
+        {
+            for (int i = 0; i <= numbers.Length; i++)
+            {
+                bool isNumberPresent = false;
+                for (int j = 0; j < numbers.Length; j++)
+                {
+                    if (numbers[j] == i)
+                    {
+                        isNumberPresent = true;
+                        break;
+                    }
+                }
+
+                if (isNumberPresent == false)
+                {
+                    return i;
+                }
+            }
+            return -1;
+        }
+
+        // Better Approach using Hash Array
+        public static int FindMissingNumberV2(int[] numbers) 
+        {
+            int[] hashArray = new int[numbers.Length + 1];
+
+            for(int i = 0; i < numbers.Length; i++)
+            {
+                int presentNumber = numbers[i];
+                hashArray[presentNumber] = 1;
+            }
+
+            for (int i = 0; i < hashArray.Length; i++)
+            {
+                if (hashArray[i] == 0)
+                    return i;
+            }
+            return -1;
+        }
+
+        // Optimal Approach - A 
+        // Using Sum of N natural numbers
+        public static int FindMissingNumberV3(int[] numbers)
+        {
+            int calculateSum = 0;
+            int length = numbers.Length;
+            int totalSum = length * (length + 1) / 2;
+
+            for (int i = 0; i < length; i++)
+            {
+                calculateSum = calculateSum + numbers[i];
+            }
+            return totalSum - calculateSum;
+        }
+
+        // Optimal Approach B
+        // Using XOR operation
+        public static int FindMissingNumberV4(int[] numbers)
+        {
+            int XOR = 0;
+            int arrayLength = numbers.Length;
+
+            for (int i = 0; i < arrayLength; i++ )
+            {
+                XOR = XOR ^ i ^ numbers[i];
+            }
+            return XOR ^ arrayLength;
+        }
+    }
+}
