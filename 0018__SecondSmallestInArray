@@ -1,0 +1,101 @@
+using System;
+
+namespace Practice
+{
+    internal class Program
+    {
+        static void Main()
+        {
+            // Sample Array of Integers
+            int[] numbersA = { 0, 1, 2, 4, 5};
+            int[] numbersB = { 0, 1};
+            int[] numbersC = { 0, 1, 0, 1, 3, 4, 4, 5, 5};
+            int[] numbersD = { 1, 3, 2, 9, 5, 4, 1, 1, 1, 4, 6};
+            int[] numbersE = { -11, 13, -99, 98, 0, 45, -113, 500};
+
+            Console.WriteLine(FindSecondSmallestNumberV1(numbersE));
+            Console.WriteLine(FindSecondSmallestNumberV2(numbersD));
+            Console.WriteLine(FindSecondSmallestNumberV3(numbersC));
+            Console.WriteLine(FindSecondSmallestNumberV4(numbersA));
+        }
+
+        // Find the second smallest number in an array - Version 1 (Using Sorting)
+        public static int FindSecondSmallestNumberV1(int[] inputArr)
+        {
+            Array.Sort(inputArr);
+            int firstSmallest = inputArr[0];
+            int secondSmallest = -1;
+
+            for (int i = 1; i < inputArr.Length; i++)
+            {
+                if (inputArr[i] > firstSmallest)
+                {
+                    secondSmallest = inputArr[i];
+                    break;
+                }
+            }
+            return secondSmallest;
+        }
+
+        // Find the smallest number in an array - Version 2 (Using Iteration)
+        public static int FindSecondSmallestNumberV2(int[] inputArr)
+        {
+            if (inputArr == null || inputArr.Length < 2)
+                throw new ArgumentException("Array must contain at least two elements.");
+
+            // First loop: find the smallest
+            int firstSmallest = inputArr[0];
+            for (int i = 1; i < inputArr.Length; i++)
+            {
+                if (inputArr[i] < firstSmallest)
+                {
+                    firstSmallest = inputArr[i];
+                }
+            }
+
+            // Second loop: find the smallest element greater than firstSmallest
+            int secondSmallest = int.MaxValue;
+            for (int i = 0; i < inputArr.Length; i++)
+            {
+                if (inputArr[i] > firstSmallest && inputArr[i] < secondSmallest)
+                {
+                    secondSmallest = inputArr[i];
+                }
+            }
+
+            if (secondSmallest == int.MaxValue)
+                throw new InvalidOperationException("No second smallest element found (all elements equal).");
+
+            return secondSmallest;
+        }
+
+        // Find the second smallest number in an array - Version 3 (Single Pass)
+        // Optimal Approach
+        public static int FindSecondSmallestNumberV3(int[] inputArr)
+        {
+            int firstSmallest = int.MaxValue;
+            int secondSmallest = int.MaxValue;
+
+            for (int i = 0; i < inputArr.Length; i++)
+            {
+                if (inputArr[i] < firstSmallest)
+                {
+                    secondSmallest = firstSmallest;
+                    firstSmallest = inputArr[i];
+                }
+                else if (inputArr[i] > firstSmallest && inputArr[i] < secondSmallest)
+                {
+                    secondSmallest = inputArr[i];
+                }
+            }
+            return secondSmallest;
+        }
+
+        // LINQ Approach
+        public static int FindSecondSmallestNumberV4(int[] inputArr)
+        {
+            int secondSmallest = inputArr.Distinct().OrderBy(x => x).Skip(1).First();
+            return secondSmallest;
+        }
+    }
+}
