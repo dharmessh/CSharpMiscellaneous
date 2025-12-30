@@ -1,0 +1,49 @@
+using System;
+
+namespace Practice
+{
+    internal class Program
+    {
+        static void Main()
+        {
+            // Sample Array of Integers
+            int[] numbersA = { 0, 1, 2, 4, 5};
+            int[] numbersB = { 0, 1};
+            int[] numbersC = { 0, 1, 0, 1, 3, 4, 4, 5, 5};
+            int[] numbersD = { 1, 3, 2, 9, 5, 4, 1, 1, 1, 4, 6};
+            int[] numbersE = { -11, 13, -99, 98, 0, 45, -113, 500};
+
+            Console.WriteLine(SmallestNumberV1(numbersE));
+            Console.WriteLine(SmallestNumberV2(numbersD));
+            Console.WriteLine(SmallestNumberV3(numbersC));
+        }
+
+        // Find the smallest number in an array - Version 1 (Using Sorting)
+        public static int SmallestNumberV1(int[] inputArr)
+        {
+            Array.Sort(inputArr);
+            return inputArr[0];
+        }
+
+        // Find the smallest number in an array - Version 2 (Using Iteration)
+        // Optimal Approach
+        public static int SmallestNumberV2(int[] inputArr)
+        {
+            int smallestNum = inputArr[0];
+            for (int i = 1; i < inputArr.Length; i++)
+            {
+                if (inputArr[i] < smallestNum)
+                {
+                    smallestNum = inputArr[i];
+                }
+            }
+            return smallestNum;
+        }
+
+        //  Using LINQ
+        public static int SmallestNumberV3(int[] inputArr)
+        {
+            return inputArr.Min();
+        }
+    }
+}
