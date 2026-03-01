@@ -1,0 +1,46 @@
+using System;
+
+namespace Practice
+{
+    internal class Program
+    {
+        public static void Main()
+        {
+            // Sample Array of Integers
+            int[] numbersA = { 2, 7, 11, 15 };
+            int targetSum = 9;
+
+            int[] result = TwoSum(numbersA, targetSum);
+
+            // Output the result
+            Console.WriteLine($"Indices: {result[0]}, {result[1]}");
+        }
+
+        // LeetCode - Two Sum Problem
+        // https://leetcode.com/problems/two-sum-ii-input-array-is-sorted/description/
+        // Optimal Approach
+        public static int[] TwoSum(int[] inputArr, int target)
+        {
+            int left = 0;
+            int right = inputArr.Length - 1;
+
+            while (left < right)
+            {
+                int sum = inputArr[left] + inputArr[right];
+                if (sum == target) // Target value
+                {
+                    return new int[] { left + 1, right + 1 }; // Return 1-based indices
+                }
+                else if (sum < target)
+                {
+                    left++; // Move left pointer to the right
+                }
+                else
+                {
+                    right--; // Move right pointer to the left
+                }
+            }
+            return new int[] { -1, -1 }; // Return -1 if no solution is found
+        }
+    }
+}
