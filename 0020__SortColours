@@ -1,0 +1,95 @@
+using System;
+using System.Globalization;
+
+namespace Practice
+{
+    internal class Program
+    {
+        public static void Main()
+        {
+            // Sample Array of Integers
+            int[] sampleArr = { 2, 0, 2, 1, 1, 0 };
+            int[] sampleArrB = { 2, 0, 2, 1, 1, 0, 0, 0, 0, 2 };
+
+            SortColours(sampleArr);
+            DutchNationalFlagAlgorithm(sampleArrB);
+
+            foreach (var element in sampleArrB)
+            {
+                Console.WriteLine(element);
+            }
+        }
+
+        // LeetCode 75 - Sort Colours | Dutch National Flag Algorithm
+        // https://leetcode.com/problems/sort-colors/
+        // Brute Force Approach
+        public static void SortColours(int[] nums)
+        {
+            int countZero = 0;
+            int countOne = 0;
+            int countTwo = 0;
+            int iterator = 0;
+
+            for (int i = 0; i < nums.Length; i++)
+            {
+                if (nums[i] == 0)
+                {
+                    countZero++;
+                }
+                else if (nums[i] == 1)
+                {
+                    countOne++;
+                }
+                else
+                {
+                    countTwo++;
+                }
+            }
+
+            while (countZero != 0)
+            {
+                nums[iterator] = 0; iterator++; countZero--;
+            }
+            while (countOne != 0)
+            {
+                nums[iterator] = 1; iterator++; countOne--;
+            }
+            while (countTwo != 0)
+            {
+                nums[iterator] = 2; iterator++; countTwo--;
+            }
+        }
+
+        // Optimal Approach - Dutch National Flag Algorithm
+        public static void DutchNationalFlagAlgorithm(int[] num)
+        {
+            int start = 0;
+            int end = num.Length - 1;
+            int iterator = 0;
+
+            while (iterator <= end)
+            {
+                if (num[iterator] == 0)
+                {
+                    Swap(num, iterator, start);
+                    iterator++;
+                    start++;
+                }
+                else if (num[iterator] == 1)
+                {
+                    iterator++;
+                }
+                else
+                {
+                    Swap(num, iterator, end);
+                    end--;
+                }
+            }
+        }
+
+        public static void Swap(int[] num, int i, int j)
+        {
+            (num[j], num[i]) = (num[i], num[j]);
+        }
+    }
+}
