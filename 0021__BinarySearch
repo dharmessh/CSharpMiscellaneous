@@ -1,0 +1,55 @@
+using System;
+
+namespace Practice
+{
+    internal class Program
+    {
+        public static void Main()
+        {
+            // Fixed Array of Integers
+            int[] numbers = { 5, 6, 7, 8, 10, 12, 15, 23, 45, 67, 89, 90, 100 };
+            int[] numbersA = { 5 };
+            int searchElement = 5;
+
+            Console.WriteLine(LinearSearch(numbers, searchElement));
+            Console.WriteLine(BinarySearch(numbersA, searchElement));
+        }
+
+        // Linear Search 
+        // TC: O(N)
+        public static int LinearSearch(int[] inputArr, int target)
+        {
+            for (int i = 0; i < inputArr.Length; i++)
+            {
+                if (inputArr[i] == target)
+                {
+                    return i;
+                }
+            }
+            return -1;
+        }
+
+        // Binary Search
+        // LeetCode 704 
+        // https://leetcode.com/problems/binary-search/description/
+        // TC: O(logN)
+        public static int BinarySearch(int[] inputArr, int searchElement)
+        {
+            int left = 0;
+            int right = inputArr.Length - 1;
+
+            while (left <= right)
+            {
+                int mid = (left + right) / 2;
+
+                if (inputArr[mid] == searchElement)
+                    return mid;
+                else if (inputArr[mid] > searchElement)
+                    right = mid - 1;
+                else
+                    left = mid + 1;
+            }
+            return -1;
+        }
+    }
+}
